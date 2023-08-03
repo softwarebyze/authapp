@@ -1,11 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_cors import cross_origin
 import psycopg2
+import jwt
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
 DB_NAME = "authappdb"
 DB_USER = "zack"
+SECRET_KEY = "super_secret"
 
 
 # Function to create a database connection and cursor
@@ -137,11 +140,29 @@ def login():
 
             if password == db_password:
                 # Passwords match, login successful
+
+                # Generate JWT token
+                expiration_time = datetime.utcnow() + timedelta(
+                    days=1
+                )  # Token expires in 1 day
+                payload = {"user_id": user_id, "exp": expiration_time}
+                token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+
                 response = {
                     "status": "success",
                     "message": "Login successful.",
                     "user_id": user_id,
                 }
+
+                # Set the token as an HttpOnly cookie in the response
+                response = make_response(jsonify(response))
+                response.set_cookie(
+                    "token", token, httponly=True, secure=True
+                )  # Secure attribute for HTTPS
+                cur.close()
+                conn.close()
+
+                return response
             else:
                 # Passwords do not match, login failed
                 response = {"status": "error", "message": "Incorrect password."}
