@@ -144,7 +144,7 @@ def login():
                 }
             else:
                 # Passwords do not match, login failed
-                response = {"status": "error", "message": "Invalid password."}
+                response = {"status": "error", "message": "Incorrect password."}
         else:
             # Email not found in the database, login failed
             response = {"status": "error", "message": "Email not registered."}
