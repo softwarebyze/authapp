@@ -54,7 +54,12 @@ def register():
     cur.close()
     conn.close()
 
-    return "<p>User information added to the database successfully!</p>"
+    response = {
+        "status": "success",
+        "message": "Your account has been created.",
+    }
+
+    return jsonify(response)
 
 
 @app.post("/check-email")
