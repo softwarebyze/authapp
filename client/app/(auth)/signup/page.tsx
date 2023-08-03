@@ -36,7 +36,7 @@ export default function Signup() {
 
     const response = await fetch(endpoint, options);
     const result = await response.json();
-    console.log(result);
+
     if (result.status == "success") {
       router.push(`/signup/${email}`);
     } else {
@@ -50,7 +50,7 @@ export default function Signup() {
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <p>Welcome to Consultant.AI</p>
+      <h1>Welcome to Consultant.AI</h1>
       <input
         type="email"
         value={email}

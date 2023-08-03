@@ -24,10 +24,10 @@ export default function RootLayout({
             Home
           </Link>
           <div className={styles.navlinks}>
-            <Link className={styles.navlink} href="login">
+            <Link className={styles.navlink} href="/login">
               Log in
             </Link>
-            <Link className={styles.navlink} href="signup">
+            <Link className={styles.navlink} href="/signup">
               Sign up
             </Link>
           </div>
