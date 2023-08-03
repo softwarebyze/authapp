@@ -12,7 +12,22 @@ def get_database_connection():
     return psycopg2.connect(dbname=DB_NAME, user=DB_USER)
 
 
-@app.route("/users", methods=["POST"])
+@app.get("/users")
+def get_users():
+    # Create a new connection and cursor for each request
+    conn = get_database_connection()
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM users;")
+    users = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return "<p>Users: {}</p>".format(users)
+
+
+@app.post("/users")
 def add_user():
     # Get data from request body
     data = request.get_json()
@@ -38,18 +53,3 @@ def add_user():
     conn.close()
 
     return "<p>User information added to the database successfully!</p>"
-
-
-@app.route("/getusers")
-def get_users():
-    # Create a new connection and cursor for each request
-    conn = get_database_connection()
-    cur = conn.cursor()
-
-    cur.execute("SELECT * FROM users;")
-    users = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    return "<p>Users: {}</p>".format(users)
