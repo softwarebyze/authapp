@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import psycopg2
 
 app = Flask(__name__)
@@ -12,8 +12,14 @@ def get_database_connection():
     return psycopg2.connect(dbname=DB_NAME, user=DB_USER)
 
 
-@app.route("/users")
+@app.route("/users", methods=["POST"])
 def add_user():
+    # Get data from request body
+    data = request.get_json()
+    name = data.get("name")
+    email = data.get("email")
+    password = data.get("password")
+
     # Create a new connection and cursor for each request
     conn = get_database_connection()
     cur = conn.cursor()
@@ -21,9 +27,10 @@ def add_user():
     cur.execute(
         "CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name varchar, email varchar, password varchar);"
     )
+    # Add user to table
     cur.execute(
         "INSERT INTO users (name, email, password) VALUES (%s, %s, %s)",
-        ("Adam", "adam@gmail.com", "mypAssw0rd"),
+        (name, email, password),
     )
     conn.commit()
 
