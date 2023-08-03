@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import cross_origin
 import psycopg2
 
 app = Flask(__name__)
@@ -56,6 +57,7 @@ def add_user():
 
 
 @app.post("/register")
+@cross_origin()
 def check_email():
     # Get data from request body
     data = request.get_json()

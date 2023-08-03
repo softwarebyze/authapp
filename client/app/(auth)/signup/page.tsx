@@ -29,9 +29,13 @@ export default function Signup() {
     };
 
     const response = await fetch(endpoint, options);
-
     const result = await response.json();
-    alert(`${result.data}`);
+    console.log(result);
+    if (result.status == "success") {
+      console.log("Success");
+    } else {
+      console.log("Failure");
+    }
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
