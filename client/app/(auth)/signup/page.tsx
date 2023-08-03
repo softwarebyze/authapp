@@ -1,11 +1,15 @@
 "use client";
 import { FormEvent, useState } from "react";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
+
   // Handles the submit event on form submit.
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     // Stop the form from submitting and refreshing the page.
@@ -34,10 +38,13 @@ export default function Signup() {
     const result = await response.json();
     console.log(result);
     if (result.status == "success") {
-      console.log("Success");
+      router.push(`/signup/${email}`);
     } else {
       if (result.message === "Email already exists.") {
         setError("Email already exists.");
+      } else {
+        setError("Something went wrong.");
+        console.error(result);
       }
     }
   };
@@ -52,7 +59,9 @@ export default function Signup() {
       />
       <button>Continue</button>
       {error && <p className={styles.error}>{error}</p>}
-      {error === "Email already exists." && <Link href="/login">Click here to log in</Link>}
+      {error === "Email already exists." && (
+        <Link href="/login">Click here to log in</Link>
+      )}
     </form>
   );
 }
