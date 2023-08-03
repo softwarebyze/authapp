@@ -1,9 +1,11 @@
 "use client";
 import { FormEvent, useState } from "react";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   // Handles the submit event on form submit.
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     // Stop the form from submitting and refreshing the page.
@@ -34,7 +36,9 @@ export default function Signup() {
     if (result.status == "success") {
       console.log("Success");
     } else {
-      console.log("Failure");
+      if (result.message === "Email already exists.") {
+        setError("Email already exists.");
+      }
     }
   };
   return (
@@ -47,6 +51,8 @@ export default function Signup() {
         placeholder="Enter your email"
       />
       <button>Continue</button>
+      {error && <p className={styles.error}>{error}</p>}
+      {error === "Email already exists." && <Link href="/login">Click here to log in</Link>}
     </form>
   );
 }
