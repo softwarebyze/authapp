@@ -36,18 +36,24 @@ export default function Signup() {
 
     const response = await fetch(endpoint, options);
     const result = await response.json();
-
-    if (result.status == "success") {
+    // if email doesn't exist, redirect to signup page
+    if (result.message == "Email is available for registration.") {
       router.push(`/signup/${email}`);
-    } else {
-      if (result.message === "Email already exists.") {
-        setError("Email already exists.");
-      } else {
-        setError("Something went wrong.");
-        console.error(result);
-      }
+      return;
+    }
+    // if email exists, setError to "Email already exists."
+    else if (result.message === "Email already exists.") {
+      setError("Email already exists.");
+      return;
+    }
+    // else setError to "Something went wrong."
+    else {
+      setError("Something went wrong.");
+      console.error(result);
+      return;
     }
   };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1>Welcome to Consultant.AI</h1>

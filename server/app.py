@@ -95,13 +95,65 @@ def check_email():
     data = request.get_json()
     email = data.get("email")
 
-    # Check if the email is available for registration
-    if not is_email_available(email):
-        response = {"status": "error", "message": "Email already exists."}
-    else:
+    try:
+        # Check if the email is available for registration
+        if not is_email_available(email):
+            response = {"status": "success", "message": "Email already exists."}
+        else:
+            response = {
+                "status": "success",
+                "message": "Email is available for registration.",
+            }
+
+    except Exception as e:
         response = {
-            "status": "success",
-            "message": "Email is available for registration.",
+            "status": "error",
+            "message": "Error checking if email is used: " + str(e),
         }
+
+    return jsonify(response)
+
+
+@app.post("/login")
+@cross_origin()
+def login():
+    # Get data from request body
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
+
+    # Create a new connection and cursor for each request
+    conn = get_database_connection()
+    cur = conn.cursor()
+
+    try:
+        # Retrieve user data from the database based on the provided email
+        cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+        user_data = cur.fetchone()
+
+        if user_data:
+            # If the email exists, check if the provided password matches the one in the database
+            user_id, name, db_email, db_password = user_data
+
+            if password == db_password:
+                # Passwords match, login successful
+                response = {
+                    "status": "success",
+                    "message": "Login successful.",
+                    "user_id": user_id,
+                }
+            else:
+                # Passwords do not match, login failed
+                response = {"status": "error", "message": "Invalid password."}
+        else:
+            # Email not found in the database, login failed
+            response = {"status": "error", "message": "Email not registered."}
+
+    except Exception as e:
+        response = {"status": "error", "message": "Error during login: " + str(e)}
+
+    finally:
+        cur.close()
+        conn.close()
 
     return jsonify(response)
