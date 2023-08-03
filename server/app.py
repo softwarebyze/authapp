@@ -3,15 +3,21 @@ import psycopg2
 
 app = Flask(__name__)
 
-# Connect to postgres DB
-conn = psycopg2.connect("dbname=authappdb user=zack")
+DB_NAME = "authappdb"
+DB_USER = "zack"
 
-# Open a cursor to perform database operations
-cur = conn.cursor()
+
+# Function to create a database connection and cursor
+def get_database_connection():
+    return psycopg2.connect(dbname=DB_NAME, user=DB_USER)
 
 
 @app.route("/users")
 def add_user():
+    # Create a new connection and cursor for each request
+    conn = get_database_connection()
+    cur = conn.cursor()
+
     cur.execute(
         "CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name varchar, email varchar, password varchar);"
     )
@@ -20,12 +26,23 @@ def add_user():
         ("Adam", "adam@gmail.com", "mypAssw0rd"),
     )
     conn.commit()
-    # user = cur.fetchone()[0]
+
+    cur.close()
+    conn.close()
+
     return "<p>User information added to the database successfully!</p>"
 
 
 @app.route("/getusers")
 def get_users():
+    # Create a new connection and cursor for each request
+    conn = get_database_connection()
+    cur = conn.cursor()
+
     cur.execute("SELECT * FROM users;")
     users = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
     return "<p>Users: {}</p>".format(users)
