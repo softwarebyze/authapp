@@ -16,7 +16,7 @@ export default function CreateAccount({
     event.preventDefault();
 
     const data = {
-      email: params.email,
+      email: decodeURIComponent(params.email),
       name,
       password,
     };
