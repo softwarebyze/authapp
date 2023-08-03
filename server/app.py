@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import psycopg2
 
 app = Flask(__name__)
@@ -53,3 +53,35 @@ def add_user():
     conn.close()
 
     return "<p>User information added to the database successfully!</p>"
+
+
+@app.post("/register")
+def check_email():
+    # Get data from request body
+    data = request.get_json()
+    email = data.get("email")
+
+    # Create a new connection and cursor for each request
+    conn = get_database_connection()
+    cur = conn.cursor()
+
+    cur.execute(
+        "SELECT email FROM users WHERE email = %s",
+        (email,),
+    )
+    users = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    if not users:
+        # If the email is not in the database, send a success message
+        response = {
+            "status": "success",
+            "message": "Email is available for registration.",
+        }
+    else:
+        # If the email already exists in the database, send an error message
+        response = {"status": "error", "message": "Email already exists."}
+
+    return jsonify(response)
