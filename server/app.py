@@ -28,8 +28,9 @@ def get_users():
     return "<p>Users: {}</p>".format(users)
 
 
-@app.post("/users")
-def add_user():
+@app.post("/register")
+@cross_origin()
+def register():
     # Get data from request body
     data = request.get_json()
     name = data.get("name")
@@ -56,7 +57,7 @@ def add_user():
     return "<p>User information added to the database successfully!</p>"
 
 
-@app.post("/register")
+@app.post("/check-email")
 @cross_origin()
 def check_email():
     # Get data from request body

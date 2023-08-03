@@ -11,8 +11,8 @@ export default function CreateAccount({
   const [password, setPassword] = useState("");
   return (
     <form className={styles.form}>
-      <p>Email: {decodeURIComponent(params.email)}</p>
       <h1>Create your account</h1>
+      <p>Email: {decodeURIComponent(params.email)}</p>
       <input
         type="text"
         autoComplete="name"

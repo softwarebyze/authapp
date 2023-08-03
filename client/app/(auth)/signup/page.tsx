@@ -23,7 +23,7 @@ export default function Signup() {
     const JSONdata = JSON.stringify(data);
 
     // API endpoint where we send form data.
-    const endpoint = "http://127.0.0.1:5000/register";
+    const endpoint = "http://127.0.0.1:5000/check-email";
 
     const options = {
       method: "POST",
