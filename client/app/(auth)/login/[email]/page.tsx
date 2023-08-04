@@ -2,7 +2,7 @@
 import { FormEvent, useContext, useState } from "react";
 import styles from "../../page.module.css";
 import { AuthContext } from "../../../auth-provider";
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 
 export default function Login({ params }: { params: { email: string } }) {
   const [password, setPassword] = useState("");
