@@ -180,3 +180,14 @@ def login():
         conn.close()
 
     return jsonify(response)
+
+
+@app.post("/logout")
+@cross_origin()
+def logout():
+    # Set an empty token in the cookie with an expired expiration time to log out the user
+    response = make_response(jsonify({"status": "success", "message": "Logged out."}))
+    response.set_cookie(
+        "token", "", expires=0, httponly=True, secure=True
+    )  # Secure attribute for HTTPS
+    return response
