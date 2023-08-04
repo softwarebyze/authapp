@@ -60,7 +60,11 @@ export default function Login() {
         color="primary"
       />
       <button>Continue</button>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && (
+        <Typography variant="body1" className={styles.error}>
+          {error}
+        </Typography>
+      )}
       <Link href="/signup">
         Don&apos;t have an account? Click here to sign up
       </Link>

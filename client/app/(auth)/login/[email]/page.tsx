@@ -49,7 +49,9 @@ export default function Login({ params }: { params: { email: string } }) {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Typography variant="h1">Login</Typography>
-      <p>Email: {decodeURIComponent(params.email)}</p>
+      <Typography variant="body1">
+        Email: {decodeURIComponent(params.email)}
+      </Typography>
       <TextField
         type="password"
         autoComplete="new-password"
@@ -60,7 +62,7 @@ export default function Login({ params }: { params: { email: string } }) {
         color="primary"
       />
       <button>Sign up</button>
-      {message && <p>{message}</p>}
+      {message && <Typography variant="body1">{message}</Typography>}
     </form>
   );
 }

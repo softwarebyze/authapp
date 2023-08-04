@@ -50,7 +50,9 @@ export default function CreateAccount({
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Typography variant="h1">Create your account</Typography>
-      <p>Email: {decodeURIComponent(params.email)}</p>
+      <Typography variant="body1">
+        Email: {decodeURIComponent(params.email)}
+      </Typography>
       <TextField
         type="text"
         autoComplete="name"
@@ -70,7 +72,7 @@ export default function CreateAccount({
         color="primary"
       />
       <button>Sign up</button>
-      {message && <p>{message}</p>}
+      {message && <Typography variant="body1">{message}</Typography>}
     </form>
   );
 }

@@ -68,7 +68,11 @@ export default function Signup() {
         color="primary"
       />
       <button>Continue</button>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && (
+        <Typography variant="body1" className={styles.error}>
+          {error}
+        </Typography>
+      )}
       {error === "Email already exists." && (
         <Link href="/login">Click here to log in</Link>
       )}
