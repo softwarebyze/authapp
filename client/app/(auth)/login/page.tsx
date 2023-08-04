@@ -1,8 +1,9 @@
 "use client";
 import { FormEvent, useState } from "react";
 import styles from "../page.module.css";
-import Link from '@mui/material/Link';
+import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
+import { TextField } from "@mui/material";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -50,11 +51,13 @@ export default function Login() {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1>Login</h1>
-      <input
+      <TextField
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
+        label="Enter your email"
+        variant="outlined"
+        color="primary"
       />
       <button>Continue</button>
       {error && <p className={styles.error}>{error}</p>}

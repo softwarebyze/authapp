@@ -1,6 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import styles from "../../page.module.css";
+import { TextField } from "@mui/material";
 
 export default function CreateAccount({
   params,
@@ -50,19 +51,23 @@ export default function CreateAccount({
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1>Create your account</h1>
       <p>Email: {decodeURIComponent(params.email)}</p>
-      <input
+      <TextField
         type="text"
         autoComplete="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Full name"
+        label="Full name"
+        variant="outlined"
+        color="primary"
       />
-      <input
+      <TextField
         type="password"
         autoComplete="new-password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="password"
+        label="password"
+        variant="outlined"
+        color="primary"
       />
       <button>Sign up</button>
       {message && <p>{message}</p>}

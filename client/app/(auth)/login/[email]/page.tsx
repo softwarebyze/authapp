@@ -2,6 +2,7 @@
 import { FormEvent, useContext, useState } from "react";
 import styles from "../../page.module.css";
 import { AuthContext } from "../../../auth-provider";
+import { TextField } from "@mui/material";
 
 export default function Login({ params }: { params: { email: string } }) {
   const [password, setPassword] = useState("");
@@ -49,12 +50,14 @@ export default function Login({ params }: { params: { email: string } }) {
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1>Login</h1>
       <p>Email: {decodeURIComponent(params.email)}</p>
-      <input
+      <TextField
         type="password"
         autoComplete="new-password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="password"
+        label="password"
+        variant="outlined"
+        color="primary"
       />
       <button>Sign up</button>
       {message && <p>{message}</p>}
