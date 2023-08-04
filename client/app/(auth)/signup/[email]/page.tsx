@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import styles from "../../page.module.css";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
 export default function CreateAccount({
   params,
@@ -49,7 +49,7 @@ export default function CreateAccount({
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1>Create your account</h1>
+      <Typography variant="h1">Create your account</Typography>
       <p>Email: {decodeURIComponent(params.email)}</p>
       <TextField
         type="text"

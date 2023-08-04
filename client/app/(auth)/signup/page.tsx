@@ -4,6 +4,7 @@ import styles from "../page.module.css";
 import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
 import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -57,7 +58,7 @@ export default function Signup() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1>Welcome to Consultant.AI</h1>
+      <Typography variant="h1">Welcome to Consultant.AI</Typography>
       <TextField
         type="email"
         value={email}

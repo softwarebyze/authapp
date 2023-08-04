@@ -2,7 +2,7 @@
 import { FormEvent, useContext, useState } from "react";
 import styles from "../../page.module.css";
 import { AuthContext } from "../../../auth-provider";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
 export default function Login({ params }: { params: { email: string } }) {
   const [password, setPassword] = useState("");
@@ -48,7 +48,7 @@ export default function Login({ params }: { params: { email: string } }) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1>Login</h1>
+      <Typography variant="h1">Login</Typography>
       <p>Email: {decodeURIComponent(params.email)}</p>
       <TextField
         type="password"

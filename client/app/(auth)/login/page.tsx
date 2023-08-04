@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 import styles from "../page.module.css";
 import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ export default function Login() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1>Login</h1>
+      <Typography variant="h1">Login</Typography>
       <TextField
         type="email"
         value={email}
