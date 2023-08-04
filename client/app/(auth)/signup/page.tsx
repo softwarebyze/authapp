@@ -4,7 +4,7 @@ import styles from "../page.module.css";
 import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -67,7 +67,7 @@ export default function Signup() {
         variant="outlined"
         color="primary"
       />
-      <button>Continue</button>
+      <Button variant="text">Continue</Button>
       {error && (
         <Typography variant="body1" className={styles.error}>
           {error}

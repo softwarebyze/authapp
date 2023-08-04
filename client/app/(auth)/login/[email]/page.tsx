@@ -61,7 +61,7 @@ export default function Login({ params }: { params: { email: string } }) {
         variant="outlined"
         color="primary"
       />
-      <button>Sign up</button>
+      <Button variant="text">Sign up</Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </form>
   );

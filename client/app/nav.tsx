@@ -4,6 +4,7 @@ import Link from "@mui/material/Link";
 import { useContext } from "react";
 import { AuthContext } from "./auth-provider";
 import { useRouter } from "next/navigation";
+import { Button } from "@mui/material";
 
 export default function Navbar() {
   const { userId, setUserId } = useContext(AuthContext);
@@ -33,9 +34,9 @@ export default function Navbar() {
         Home
       </Link>
       {userId ? (
-        <button className={styles.navlink} onClick={logOut}>
+        <Button variant="text" className={styles.navlink} onClick={logOut}>
           Log out
-        </button>
+        </Button>
       ) : (
         <div className={styles.navlinks}>
           <Link className={styles.navlink} href="/login">

@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import styles from "../../page.module.css";
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 
 export default function CreateAccount({
   params,
@@ -71,7 +71,7 @@ export default function CreateAccount({
         variant="outlined"
         color="primary"
       />
-      <button>Sign up</button>
+      <Button variant="text">Sign up</Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </form>
   );

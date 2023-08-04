@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 import styles from "../page.module.css";
 import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -59,7 +59,7 @@ export default function Login() {
         variant="outlined"
         color="primary"
       />
-      <button>Continue</button>
+      <Button variant="text">Continue</Button>
       {error && (
         <Typography variant="body1" className={styles.error}>
           {error}
