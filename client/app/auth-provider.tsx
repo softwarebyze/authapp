@@ -17,7 +17,8 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const userIdFromLocalStorage = localStorage.getItem("userId");
+  const userIdFromLocalStorage =
+    typeof window !== "undefined" ? localStorage?.getItem("userId") : null;
   const [userId, setUserId] = useState(userIdFromLocalStorage);
 
   useEffect(() => {
