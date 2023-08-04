@@ -59,7 +59,9 @@ export default function Login() {
         variant="outlined"
         color="primary"
       />
-      <Button variant="text">Continue</Button>
+      <Button type="submit" variant="text">
+        Continue
+      </Button>
       {error && (
         <Typography variant="body1" className={styles.error}>
           {error}
