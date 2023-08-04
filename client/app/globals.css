@@ -87,6 +87,11 @@ body {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
