@@ -4,7 +4,7 @@ import styles from "../page.module.css";
 import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
 import TextField from "@mui/material/TextField";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -57,25 +57,31 @@ export default function Signup() {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <Typography variant="h1">Welcome to Consultant.AI</Typography>
-      <TextField
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        label="Enter your email"
-        variant="outlined"
-        color="primary"
-      />
-      <Button variant="text">Continue</Button>
-      {error && (
-        <Typography variant="body1" className={styles.error}>
-          {error}
-        </Typography>
-      )}
-      {error === "Email already exists." && (
-        <Link href="/login">Click here to log in</Link>
-      )}
-    </form>
+    <>
+      <Typography variant="h2" sx={{ my: 4, mx: "auto" }}>
+        Welcome to Consultant.AI
+      </Typography>
+      <Box sx={{ width: 1 / 4 }}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <TextField
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Enter your email"
+            variant="outlined"
+            color="primary"
+          />
+          <Button variant="text">Continue</Button>
+          {error && (
+            <Typography variant="body1" className={styles.error}>
+              {error}
+            </Typography>
+          )}
+          {error === "Email already exists." && (
+            <Link href="/login">Click here to log in</Link>
+          )}
+        </form>
+      </Box>
+    </>
   );
 }

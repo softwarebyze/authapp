@@ -50,7 +50,7 @@ export default function Login() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <Typography variant="h1">Login</Typography>
+      <Typography variant="h2">Login</Typography>
       <TextField
         type="email"
         value={email}

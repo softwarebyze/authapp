@@ -49,7 +49,7 @@ export default function CreateAccount({
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <Typography variant="h1">Create your account</Typography>
+      <Typography variant="h2">Create your account</Typography>
       <Typography variant="body1">
         Email: {decodeURIComponent(params.email)}
       </Typography>
