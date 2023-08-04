@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 // Define the type for AuthContext
 interface AuthContext {
@@ -17,7 +17,12 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [userId, setUserId] = useState<string | null>(null); // Explicitly set the type for userId
+  const userIdFromLocalStorage = localStorage.getItem("userId");
+  const [userId, setUserId] = useState(userIdFromLocalStorage);
+
+  useEffect(() => {
+    localStorage.setItem("userId", userId || "");
+  }, [userId]);
 
   return (
     <AuthContext.Provider value={{ userId, setUserId }}>
