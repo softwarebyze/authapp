@@ -71,7 +71,9 @@ export default function CreateAccount({
         variant="outlined"
         color="primary"
       />
-      <Button variant="text">Sign up</Button>
+      <Button type="submit" variant="text">
+        Sign up
+      </Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </form>
   );
