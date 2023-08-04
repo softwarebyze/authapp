@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import styles from "../page.module.css";
-import Link from "next/link";
+import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {

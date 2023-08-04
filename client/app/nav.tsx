@@ -1,6 +1,6 @@
 "use client";
 import styles from "./layout.module.css";
-import Link from "next/link";
+import Link from "@mui/material/Link";
 import { useContext } from "react";
 import { AuthContext } from "./auth-provider";
 import { useRouter } from "next/navigation";
