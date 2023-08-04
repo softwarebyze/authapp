@@ -1,10 +1,12 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import styles from "../../page.module.css";
+import { AuthContext } from "../../../auth-provider";
 
 export default function Login({ params }: { params: { email: string } }) {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const { setUserId } = useContext(AuthContext);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     // Stop the form from submitting and refreshing the page.
@@ -35,6 +37,7 @@ export default function Login({ params }: { params: { email: string } }) {
 
     if (result.status == "success") {
       setMessage(result.message);
+      setUserId(result?.user_id);
     } else if (result.message === "Incorrect password.") {
       setMessage(result.message);
     } else {
