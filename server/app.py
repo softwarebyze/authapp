@@ -30,6 +30,12 @@ def is_email_available(email):
     return not bool(users)
 
 
+def generate_jwt(user_id):
+    expiration_time = datetime.utcnow() + timedelta(days=1)  # Token expires in 1 day
+    payload = {"user_id": user_id, "exp": expiration_time}
+    return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+
+
 @app.get("/users")
 def get_users():
     # Create a new connection and cursor for each request
@@ -141,12 +147,8 @@ def login():
             if password == db_password:
                 # Passwords match, login successful
 
-                # Generate JWT token
-                expiration_time = datetime.utcnow() + timedelta(
-                    days=1
-                )  # Token expires in 1 day
-                payload = {"user_id": user_id, "exp": expiration_time}
-                token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+                # Generate JWT
+                token = generate_jwt(user_id)
 
                 response = {
                     "status": "success",
