@@ -9,11 +9,12 @@ interface IssueForm {
   labels: string[];
 }
 export default function IssueForm() {
-  const [form, setForm] = useState<IssueForm>({
+  const emptyForm = {
     title: "",
     body: "",
     labels: [],
-  });
+  };
+  const [form, setForm] = useState<IssueForm>(emptyForm);
   const [label, setLabel] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -51,6 +52,16 @@ export default function IssueForm() {
       console.error(result);
     } else {
       setMessage(result.message);
+      setForm(emptyForm);
+    }
+  };
+  // This avoids submitting the whole form when pressing Enter to add a label
+  const handleLabelInputKeyPress = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addLabel();
     }
   };
   return (
@@ -81,6 +92,7 @@ export default function IssueForm() {
               type="text"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
+              onKeyPress={handleLabelInputKeyPress} // Added this line to avoid submitting form on Enter key press
               label="Issue Label"
               variant="outlined"
               color="primary"
@@ -116,7 +128,7 @@ export default function IssueForm() {
               href="
           https://github.com/softwarebyze/authapp/issues"
             >
-              View issue on GitHub
+              View issues on GitHub
             </a>
           </Typography>
         )}

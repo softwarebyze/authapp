@@ -4,7 +4,7 @@ import styles from "../page.module.css";
 import Link from "@mui/material/Link";
 import { useRouter } from "next/navigation";
 import TextField from "@mui/material/TextField";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -58,9 +58,15 @@ export default function Signup() {
 
   return (
     <>
-      <Typography variant="h2" sx={{ my: 4, mx: "auto" }}>
-        Welcome to Consultant.AI
-      </Typography>
+      <Box>
+        <Typography
+          className={styles.headerText}
+          variant="h3"
+          sx={{ my: 4, mx: "auto" }}
+        >
+          Welcome to Consultant.AI
+        </Typography>
+      </Box>
       <Box sx={{ width: 1 / 4 }}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <TextField
