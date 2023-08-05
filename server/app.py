@@ -3,6 +3,7 @@ from flask_cors import cross_origin
 import psycopg2
 import jwt
 from datetime import datetime, timedelta
+from github import create_github_issue
 
 app = Flask(__name__)
 
@@ -191,3 +192,24 @@ def logout():
         "token", "", expires=0, httponly=True, secure=True
     )  # Secure attribute for HTTPS
     return response
+
+
+@app.post("/create-issue")
+@cross_origin()
+def create_issue():
+    # Get data from request body
+    data = request.get_json()
+    issue_title = data.get("title")
+    issue_body = data.get("body")
+    issue_labels = data.get("labels", [])
+
+    try:
+        if create_github_issue(issue_title, issue_body, issue_labels):
+            response = {"status": "success", "message": "GitHub issue created successfully."}
+        else:
+            response = {"status": "error", "message": "Failed to create GitHub issue."}
+
+    except Exception as e:
+        response = {"status": "error", "message": "Error creating GitHub issue: " + str(e)}
+    
+    return jsonify(response)
