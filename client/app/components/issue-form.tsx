@@ -24,6 +24,7 @@ export default function IssueForm() {
     setLabel("");
   };
   const handleCreateIssue = async (event: FormEvent<HTMLFormElement>) => {
+    setError("");
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
 
@@ -127,6 +128,7 @@ export default function IssueForm() {
             <a
               href="
           https://github.com/softwarebyze/authapp/issues"
+              target="_blank"
             >
               View issues on GitHub
             </a>
